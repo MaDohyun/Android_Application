@@ -16,7 +16,7 @@ public class BringerSkill : MonoBehaviour
         this.bringer = bringer;
     }
 
-    public void Attack(float damage)
+    public void Attack()
     {
         for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
         {
