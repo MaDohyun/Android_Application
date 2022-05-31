@@ -51,34 +51,37 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler
     }
     public void RegisterEquiptment()
     {
-        for (int i = 0; i < Player.instance.battleEquipmentList.Count; i++)
+        if (equipment != null)
         {
-            if (Player.instance.battleEquipmentList[i] == equipment)
-            {
-                selectedOn = true;
-            }
-        }
-        if (!selectedOn)
-        {
-
-            if (Player.instance.battleEquipmentList.Count < 2)
-            {
-                Player.instance.battleEquipmentList.Add(equipment);
-                selectedOn = true;
-                equipmentPanel.SetSelectedEquiptmentSlot();
-
-            }
-        }
-        else if (selectedOn)
-        {
-
             for (int i = 0; i < Player.instance.battleEquipmentList.Count; i++)
             {
                 if (Player.instance.battleEquipmentList[i] == equipment)
                 {
-                    Player.instance.battleEquipmentList.RemoveAt(i);
-                    selectedOn = false;
+                    selectedOn = true;
+                }
+            }
+            if (!selectedOn)
+            {
+
+                if (Player.instance.battleEquipmentList.Count < 2)
+                {
+                    Player.instance.battleEquipmentList.Add(equipment);
+                    selectedOn = true;
                     equipmentPanel.SetSelectedEquiptmentSlot();
+
+                }
+            }
+            else if (selectedOn)
+            {
+
+                for (int i = 0; i < Player.instance.battleEquipmentList.Count; i++)
+                {
+                    if (Player.instance.battleEquipmentList[i] == equipment)
+                    {
+                        Player.instance.battleEquipmentList.RemoveAt(i);
+                        selectedOn = false;
+                        equipmentPanel.SetSelectedEquiptmentSlot();
+                    }
                 }
             }
         }

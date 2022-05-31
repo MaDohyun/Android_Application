@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AppleOrb : Equipment
 {
-    public ParticleSystem heal;
+    public GameObject heal;
     float healtimer = 0;
-
+    [SerializeField] float healVolume;
     private void Start()
     {
         timer = cooltime;
-        heal.Stop();
+        
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class AppleOrb : Equipment
             healtimer -= Time.deltaTime;
             for(int i = 0; i< Player.instance.battleShadowList.Count; i++)
             {
-                Player.instance.battleShadowList[i].HP += Time.deltaTime*2;
+                Player.instance.battleShadowList[i].HP += Time.deltaTime* healVolume;
             }
         }
        
@@ -43,14 +43,9 @@ public class AppleOrb : Equipment
 
     public override void UseEquiptment()
     {
-        heal.Play();
-        Invoke("StopParticle",5.0f);
+        Instantiate(heal);
         healtimer = 5.0f;
         
-
     }
-    public void StopParticle()
-    {
-        heal.Stop();
-    }
+    
 }

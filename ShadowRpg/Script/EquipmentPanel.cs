@@ -32,8 +32,8 @@ public class EquipmentPanel : MonoBehaviour
         }
         for (int i = 0; i < Player.instance.haveEquipmentList.Count; i++)
         {
-            equipmentSlots[i].drawSlotSprite(Player.instance.haveEquipmentList[i].equiptmentIcon);
             equipmentSlots[i].SetEquiptment(Player.instance.haveEquipmentList[i]);
+            equipmentSlots[i].drawSlotSprite(Player.instance.haveEquipmentList[i].equiptmentIcon);
         }
     }
     public void SetSelectedEquiptmentSlot()

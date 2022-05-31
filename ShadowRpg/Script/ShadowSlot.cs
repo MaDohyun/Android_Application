@@ -27,8 +27,10 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
     private void Update()
     {
         if (selectedOn)
-        {
-            selectedBorderLine.SetActive(true);
+        { 
+           
+                selectedBorderLine.SetActive(true);
+          
         }
         else if (!selectedOn)
         {
@@ -42,13 +44,26 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
         slotImage.GetComponent<Image>().sprite = sprite;
         
     }
-    public void SlotImageOff()
+    public void ResetSlot()
     {
         slotImage.SetActive(false);
+        selectedBorderLine.SetActive(false);
+        selectedOn = false;
     }
     public void SetShadow(Shadow shadow)
     {
         this.shadow = shadow;
+    }
+    public void SetselectedBorderLine()
+    {
+        for (int i=0;i< Player.instance.battleShadowList.Count;i++)
+        {
+            if (Player.instance.battleShadowList[i] == this.shadow)
+            {
+                selectedOn = true;
+                selectedBorderLine.SetActive(true);
+            }
+        }
     }
     public void RegisterShadow()
     {

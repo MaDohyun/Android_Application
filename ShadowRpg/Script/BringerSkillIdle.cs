@@ -27,7 +27,6 @@ public class BringerSkillIdle : StateMachineBehaviour
 
                 break;
             case 0:
-                Debug.Log("skill");
                 animator.SetTrigger("SkillAction");
                 break;
                 

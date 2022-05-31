@@ -138,7 +138,7 @@ public class Shadow : MonoBehaviour
 
     }
 
-    public virtual void AttactAnime()
+    public virtual void AttackAnime()
     {
         if (isSelected && Player.instance.battleShadowList.Count > 0 &&BattleManager.battleEnemyList.Count>0&& actionOn)
         {
@@ -163,26 +163,29 @@ public class Shadow : MonoBehaviour
 
     public virtual void SkillAnime()
     {
-        if (isSelected && actionOn)
+        if (Mathf.Abs(transform.position.x - battlePosition.position.x) < 0.1f)
         {
-            actionDelay = 0;
-            actionOn = false;
-            skillDelay = skillCooltime;
-            skillOn = false;
-            animator.SetBool("Skill", true);
-            actionState = ActionState.Skill;
+            if (isSelected && actionOn)
+            {
+                actionDelay = 0;
+                actionOn = false;
+                skillDelay = skillCooltime;
+                skillOn = false;
+                animator.SetBool("Skill", true);
+                actionState = ActionState.Skill;
+            }
         }
 
     }
 
     public void DefendOff()
     {
-        if (actionOn && actionState == ActionState.Defend)
-        {
-            animator.SetBool("Defend", false);
+            if (actionOn && actionState == ActionState.Defend)
+            {
+                animator.SetBool("Defend", false);
 
-        }
-
+            }
+        
     }
     private void LateUpdate()
     {

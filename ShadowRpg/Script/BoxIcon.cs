@@ -11,7 +11,7 @@ public class BoxIcon : MapIcon,ITriggerOn
 
         if (collision.CompareTag("Player"))
         {
-            Invoke("IconTriggerOn", 0.5f);
+            Invoke("IconTriggerOn", 0.4f);
 
         }
 

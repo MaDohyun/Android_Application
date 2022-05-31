@@ -19,19 +19,21 @@ public class NormalKnight : Shadow
             base.TakeDamege(damage);
         }
     }
-    public override void AttactAnime()
+  
+        public override void Attack()
     {
         if (actionState != ActionState.Skill)
         {
-            base.AttactAnime();
+            targetEnemy.TakeDamege(DAMAGE);
         }
         else
         {
+
             animator.SetBool("Skill", false);
-            base.AttactAnime();
-
-
+            CreateStateText("Counter");
+            targetEnemy.TakeDamege(DAMAGE*2);
         }
+
     }
 
 

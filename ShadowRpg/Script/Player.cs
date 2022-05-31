@@ -48,5 +48,6 @@ public class Player : MonoBehaviour
         {
             playerState = PlayerState.notbattle;
         }
+
     }
 }

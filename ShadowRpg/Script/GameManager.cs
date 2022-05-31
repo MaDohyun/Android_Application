@@ -37,6 +37,11 @@ public class GameManager : MonoBehaviour
     {
         MapOn();
         ChangeMoveState();
+        if (SceneManager.GetActiveScene().name == "GameOverScene" || SceneManager.GetActiveScene().name == "GameClearScene")
+        {
+           
+            GameReset();
+        }
     }
 
     public void MapOn()
@@ -142,6 +147,12 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         SceneManager.LoadScene("GameClearScene");
+    }
+    public void GameReset()
+    {
+        Destroy(Player.instance.gameObject);
+        Destroy(MapSceneCanvas.instance.gameObject);
+        Destroy(instance.gameObject);
     }
 
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BattleKeyController : MonoBehaviour
 {
     Shadow selectedShadow;
@@ -11,6 +11,7 @@ public class BattleKeyController : MonoBehaviour
     float cameraMoveXPosition;
     int random;
     [SerializeField] GameObject runImage;
+    [SerializeField] Text runText;
     float runCoolTime = 5;
     float runDelay;
     bool isRunOn = true;
@@ -163,17 +164,31 @@ public class BattleKeyController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.M))
         {
-            if (isRunOn)
+            if (GameManager.instance.battleLevel == 4)
             {
-                random = Random.Range(0, 4);
-                if (random == 0)
+                runText.text = "0%";
+            }
+            else
+            {
+                if (isRunOn)
                 {
-                    GameManager.instance.StageClear();
-                }
-                else
-                {
-                    runImage.SetActive(false);
-                    runDelay = runCoolTime;
+                    random = Random.Range(0, 4);
+                    if (random == 0)
+                    {
+                        GameManager.instance.StageClear();
+                        for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
+                        {
+                            BattleManager.battleEnemyList = new List<Enemy>();
+                            Player.instance.battleShadowList[i].targetEnemy = null;
+                            Player.instance.battleShadowList[i].battlePosition = null;
+                        }
+
+                    }
+                    else
+                    {
+                        runImage.SetActive(false);
+                        runDelay = runCoolTime;
+                    }
                 }
             }
         }
@@ -183,7 +198,7 @@ public class BattleKeyController : MonoBehaviour
         {
             if (selectedShadow != null)
             {
-                selectedShadow.AttactAnime();
+                selectedShadow.AttackAnime();
                 selectedShadow.isSelected = false;
             }
 

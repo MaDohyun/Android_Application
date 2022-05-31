@@ -15,17 +15,22 @@ public class ShadowSelectionPanel : MonoBehaviour
         shadowSelectedSlots = selectedslotHolder.GetComponentsInChildren<ShadowSelectedSlot>();
 
     }
+    private void Update()
+    {
+        
+    }
 
     public void SetShadowSlot()
     {
         for (int i = 0; i < shadowSlots.Length; i++)
         {
-            shadowSlots[i].SlotImageOff();
+            shadowSlots[i].ResetSlot();
         }
         for (int i = 0; i < Player.instance.haveShadowList.Count; i++)
         {
-            shadowSlots[i].drawSlotSprite(Player.instance.haveShadowList[i].shadowImage);
             shadowSlots[i].SetShadow(Player.instance.haveShadowList[i]);
+            shadowSlots[i].drawSlotSprite(Player.instance.haveShadowList[i].shadowImage);
+            shadowSlots[i].SetselectedBorderLine();
         }
     }
     public void SetSelectedShadowSlot()

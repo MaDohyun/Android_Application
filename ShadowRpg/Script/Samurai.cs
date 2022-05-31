@@ -21,7 +21,7 @@ public class Samurai :  Shadow
     {
         float enemytakedamage;
         enemytakedamage = targetEnemy.HP;
-        base.Attack();
+        targetEnemy.TakeDamege(DAMAGE*1.5f);
         enemytakedamage -= targetEnemy.HP;
         CreateShadowsVampireText((int)enemytakedamage);
         for (int i = 0; i < Player.instance.battleShadowList.Count; i++)

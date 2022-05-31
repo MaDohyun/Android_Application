@@ -10,14 +10,14 @@ public class MonsterIcon : MapIcon,ITriggerOn
 
         if (collision.CompareTag("Player"))
         {
-            Invoke("IconTriggerOn", 0.5f);
+            Invoke("IconTriggerOn", 0.4f);
 
         }
 
     }
     public void IconTriggerOn()
 {
-        Debug.Log("dd");
+    
         Destroy(this.gameObject);
         SceneManager.LoadScene("BattleScene");
 

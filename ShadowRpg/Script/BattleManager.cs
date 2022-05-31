@@ -64,19 +64,21 @@ public class BattleManager : MonoBehaviour
         }
         if (battleEnemyList.Count == 0)
         {
-            BattleVictory();
-        }
-
-        if (Player.instance.battleShadowList.Count == 0)
-        {
             if (GameManager.instance.battleLevel == 4)
             {
                 GameClear();
             }
             else
             {
-                Invoke("BattleLose", 0.5f);
+                BattleVictory();
             }
+        }
+
+        if (Player.instance.battleShadowList.Count == 0)
+        {
+            
+                Invoke("BattleLose", 0.5f);
+        
         }
         SlowTimeSpeed();
         ReturnTimeSpeed();
@@ -159,93 +161,43 @@ public class BattleManager : MonoBehaviour
     {
         if (GameManager.instance.battleLevel == 1)
         {
-            random = Random.Range(0, 8);
-            if (random < 1)
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel1Enemy());
-                }
-            }
-            else if (1 <= random && random < 6)
-            {
+           
                 for (int i = 0; i < 2; i++)
                 {
                     battleEnemyList.Add(enemyGenerator.GenerateLevel1Enemy());
+                }
+            
+        }
+        if (GameManager.instance.battleLevel == 2)
+        {
+            random = Random.Range(0, 8);
+            if (random < 3)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    battleEnemyList.Add(enemyGenerator.GenerateLevel2Enemy());
                 }
             }
             else 
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel1Enemy());
-                }
-            }
-          
-        }
-        if (GameManager.instance.battleLevel == 2)
-        {
-            random = Random.Range(0, 8);
-            if (random < 1)
-            {
-                for (int i = 0; i < 1; i++)
-                {
                     battleEnemyList.Add(enemyGenerator.GenerateLevel2Enemy());
                 }
             }
-            else if (1 <= random && random < 4)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel2Enemy());
-                }
-            }
-            else if (4 <= random && random < 7)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel2Enemy());
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel2Enemy());
-                }
-            }
+           
         }
         if (GameManager.instance.battleLevel == 3)
         {
             random = Random.Range(0, 8);
-            if (random < 1)
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel3Enemy());
-                }
-            }
-            else if (1 <= random && random < 4)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel3Enemy());
-                }
-            }
-            else if (4 <= random && random < 7)
-            {
+
+
                 for (int i = 0; i < 3; i++)
                 {
                     battleEnemyList.Add(enemyGenerator.GenerateLevel3Enemy());
                 }
-            }
-            else
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    battleEnemyList.Add(enemyGenerator.GenerateLevel3Enemy());
-                }
-            }
+          
+           
         }
         if (GameManager.instance.battleLevel == 4)
         {

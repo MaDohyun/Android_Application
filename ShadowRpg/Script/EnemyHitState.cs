@@ -14,7 +14,7 @@ public class EnemyHitState : StateMachineBehaviour
 
         enemySprite = animator.GetComponent<SpriteRenderer>();
         enemySprite.material.color += hitColor;
-        Debug.Log("dd");
+     
     }
 
      override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
