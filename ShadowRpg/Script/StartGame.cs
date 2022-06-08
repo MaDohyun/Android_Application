@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
+    //MapSceneを呼び込む。
     public void Startgame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MapScene");
     }
 }

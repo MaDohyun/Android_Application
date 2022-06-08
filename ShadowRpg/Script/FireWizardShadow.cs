@@ -6,6 +6,7 @@ public class FireWizardShadow : Shadow
 {
     [SerializeField] FireBallShadow fireBall;
     [SerializeField] Transform fireBallAppearTrans;
+    //FireWizardShadowは攻撃する時fireBallAppearTransにFireBallを生成する。
     public override void Attack()
     {
         fireBall.SetFireBallDamage(DAMAGE);

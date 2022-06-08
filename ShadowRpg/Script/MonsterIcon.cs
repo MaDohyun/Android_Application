@@ -7,7 +7,7 @@ public class MonsterIcon : MapIcon,ITriggerOn
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        //プレイヤーが当たるとBattleSceneに移動する。
         if (collision.CompareTag("Player"))
         {
             Invoke("IconTriggerOn", 0.4f);

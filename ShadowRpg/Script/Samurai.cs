@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Samurai :  Shadow
+public class Samurai : Shadow
 {
     public override void SkillAnime()
     {
@@ -17,6 +17,7 @@ public class Samurai :  Shadow
         }
 
     }
+    //Samuraiはスキルを使うとDAMAGE*1.5で攻撃して、ターゲットが受けたDAMAGEほど生命力を回復する。
     public void Skill()
     {
         float enemytakedamage;

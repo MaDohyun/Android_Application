@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+//Vampire攻撃をするときのtextクラス
 public class VampireText : MonoBehaviour
 {
 

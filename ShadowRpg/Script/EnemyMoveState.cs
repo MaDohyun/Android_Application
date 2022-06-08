@@ -20,7 +20,7 @@ public class EnemyMoveState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        
+        //敵はMoveアニメになるとバトル位置まで戻る。
         if (enemyTransform.position.x > enemy.battlePosition.position.x)
         {
             enemyTransform.Translate(Vector2.left * Time.deltaTime * enemy.appearSpeed);
@@ -36,12 +36,5 @@ public class EnemyMoveState : StateMachineBehaviour
         }
 
     }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
-    }
-    
 
 }

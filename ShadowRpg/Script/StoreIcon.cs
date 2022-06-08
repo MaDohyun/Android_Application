@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//プレイヤーが当たる場合StoreのPanelを見えるようにする。
 public class StoreIcon :  MapIcon,ITriggerOn
 {
     [SerializeField] StorePanel storePanel;
@@ -19,6 +19,7 @@ public class StoreIcon :  MapIcon,ITriggerOn
     {
         
         storePanel.gameObject.SetActive(true);
+        //機能が終わったらアイコンを破壊する。
         Destroy(this.gameObject);
       
 

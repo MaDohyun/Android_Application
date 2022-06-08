@@ -13,10 +13,8 @@ public class EnemyIdleState : StateMachineBehaviour
         enemyTransForm = animator.GetComponent<Transform>();
         enemy = animator.GetComponent<Enemy>();
     }
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
+　  override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {//普段敵はIdleアニメの状態でバトル位置から離れると位置に戻る。または攻撃アニメに移動する。
         if (enemy.isBattle)
         {
             if (Mathf.Abs(enemyTransForm.position.x - enemy.battlePosition.position.x) > 0.1f)
@@ -35,12 +33,5 @@ public class EnemyIdleState : StateMachineBehaviour
             }
         }
     }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
-
 
 }

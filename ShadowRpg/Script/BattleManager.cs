@@ -2,35 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//バトルを管理するクラス
 public class BattleManager : MonoBehaviour
 {
+    //バトル中の敵の位置
     public Transform[] battleEnemyPositions = new Transform[4];
-    
+    //バトル中のキャラクターの位置
     public Transform[] battleShadowPositions = new Transform[3];
 
     [SerializeField] EnemyGenerator enemyGenerator;
+    //バトルする敵の配列
     public static List<Enemy> battleEnemyList = new List<Enemy>();
 
-
+    //バトルが始まる時キャラクター登場の効果
     public ParticleSystem[] shadowPositionSummonEffects = new ParticleSystem[3];
-
+    //バトル中のカメラ
     public Camera battleCamera;
+    //選ばれたキャラクター
     Shadow selectedShadow;
 
     public GameObject[] backGrounds;
+    //バトルが終わった時の結果イメージ
     public GameObject resultImage;
+    //バトルが終わった時の結果イメージに表示されるお金のtext
     public Text resultMoneyText;
-
+    //バトルが始まる時キャラクター登場の効果があったかどうか
     bool isSummonEffect;
+    //バトルが始まる時キャラクター登場の効果の色変化
+
     float colorChange = 0;
 
     int random;
+    //バトルが終わった時の結果イメージに表示されるお金
     int resultmoney;
-    // Start is called before the first frame update
     void Start()
     {
-       
-            switch(GameManager.instance.battleLevel)
+        //バトルのレベルによって補償お金が変わる。
+        switch (GameManager.instance.battleLevel)
         {
             case 1:
                 resultmoney = Random.Range(30, 51);
@@ -57,6 +65,7 @@ public class BattleManager : MonoBehaviour
         SetSelectedShadow();
         GivePositionEnemy();
         GivePositionBattleShadow();
+        //バトルが始まる時キャラクター登場の効果がまだの場合効果を実行させる。
         if (isSummonEffect != true)
         {
             colorChange += Time.deltaTime * 0.3f;
@@ -64,10 +73,12 @@ public class BattleManager : MonoBehaviour
         }
         if (battleEnemyList.Count == 0)
         {
+            //ボスのステージで敵がいない場合ゲームクリア
             if (GameManager.instance.battleLevel == 4)
             {
                 GameClear();
             }
+            //敵がいない場合バトルクリア
             else
             {
                 BattleVictory();
@@ -76,15 +87,15 @@ public class BattleManager : MonoBehaviour
 
         if (Player.instance.battleShadowList.Count == 0)
         {
-            
-                Invoke("BattleLose", 0.5f);
+            //キャラクターが全部倒れた場合ゲームオーバー
+            Invoke("BattleLose", 0.5f);
         
         }
         SlowTimeSpeed();
         ReturnTimeSpeed();
         
     }
-
+    //敵にバトル中に位置を与える。
     public void GivePositionEnemy()
     {
         
@@ -95,7 +106,9 @@ public class BattleManager : MonoBehaviour
                 battleEnemyList[i].SetBattlePosition(battleEnemyPositions[i]);
             }
             }
-            else if (battleEnemyPositions.Length < battleEnemyList.Count)
+        //登場できる敵は与えられるバトルのいちの数より多ければならない
+
+        else if (battleEnemyPositions.Length < battleEnemyList.Count)
             {
             for (int i = 0; i < battleEnemyPositions.Length; i++)
             {
@@ -103,9 +116,8 @@ public class BattleManager : MonoBehaviour
             }
         }
         
-        
-
     }
+    //キャラクターにバトル中に位置を与える。
     public void GivePositionBattleShadow()
     {
         for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
@@ -115,6 +127,7 @@ public class BattleManager : MonoBehaviour
         }
 
     }
+    //PlayerのbattleShadowList配列の中にあるキャラクターをSetActive(true)して位置を与えて、登場効果を適用する。
     public void SetBattleShadow()
     {
         for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
@@ -127,11 +140,10 @@ public class BattleManager : MonoBehaviour
                     Player.instance.battleShadowList[i].transform.position.z);
                 Player.instance.battleShadowList[i].transform.position = vector3;
                 shadowPositionSummonEffects[i].Play();
-            
-            
         }
        
     }
+    //キャラクターの登場効果、キャラクターは影であるコンセプトなので、登場する時は色がなかったが、だんだん色が濃くなる。
     public void SetBattleShadowEffect()
     {
         for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
@@ -149,6 +161,7 @@ public class BattleManager : MonoBehaviour
         }
 
     }
+    //PlayerのbattleEquipmentList配列の中なる装備オブジェクトをSetActive(true)にする。
     public void SetBattleEquiptment()
     {
         for (int i = 0; i < Player.instance.battleEquipmentList.Count; i++)
@@ -156,18 +169,20 @@ public class BattleManager : MonoBehaviour
             Player.instance.battleEquipmentList[i].gameObject.SetActive(true);
         }
     }
-
+    //バトルレベルによって敵を生成する。
     public void SetEnemy()
     {
+        //敵を２匹生成する。
+
         if (GameManager.instance.battleLevel == 1)
         {
-           
                 for (int i = 0; i < 2; i++)
                 {
                     battleEnemyList.Add(enemyGenerator.GenerateLevel1Enemy());
                 }
             
         }
+        //敵をランダムに2~3匹生成する。
         if (GameManager.instance.battleLevel == 2)
         {
             random = Random.Range(0, 8);
@@ -187,6 +202,8 @@ public class BattleManager : MonoBehaviour
             }
            
         }
+        //敵を3匹生成する。
+
         if (GameManager.instance.battleLevel == 3)
         {
             random = Random.Range(0, 8);
@@ -199,6 +216,8 @@ public class BattleManager : MonoBehaviour
           
            
         }
+        //ボスステージの場合、決められた敵を生成する。
+
         if (GameManager.instance.battleLevel == 4)
         {
                     battleEnemyList.Add(enemyGenerator.GenerateBossEnemy1());
@@ -209,6 +228,7 @@ public class BattleManager : MonoBehaviour
 
 
     }
+    //バトルレベルによって背景を変える。
     public void SetBackGround()
     {
         for (int i = 0; i < backGrounds.Length; i++)
@@ -231,6 +251,7 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
+    //選ばれたキャラクターをセットする。
     public void SetSelectedShadow()
     {
 
@@ -246,7 +267,7 @@ public class BattleManager : MonoBehaviour
         selectedShadow = null;
 
     }
-
+    //選ばれたキャラクターがいる場合ゲームのスピードが遅くなる。
     public void SlowTimeSpeed()
     {
         
@@ -257,6 +278,7 @@ public class BattleManager : MonoBehaviour
             }
         
     }
+    //選ばれたキャラクターがいない場合ゲームのスピードを戻す。
     public void ReturnTimeSpeed()
     {
         if (selectedShadow == null)
@@ -264,15 +286,14 @@ public class BattleManager : MonoBehaviour
             Time.timeScale = 1.0f;
         }
     }
-
+    //カメラを動かせる。
     public void MoveCamera(float cameraMoveXPosition)
     {
-       
         battleCamera = battleCamera.GetComponent<Camera>();
         battleCamera.orthographicSize = 4.7f;
         battleCamera.GetComponent<Transform>().position = new Vector3(cameraMoveXPosition, battleCamera.GetComponent<Transform>().position.y, battleCamera.GetComponent<Transform>().position.z);
     }
-
+    //選ばれたキャラクターがいる場合カメラを動かせる。
     public void MoveCameraSelectedShadow()
     {
         if (selectedShadow != null)
@@ -286,6 +307,7 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+    //選ばれたキャラクターがいない場合カメラを戻す。
     public void MoveCameraOff()
     {
         if (selectedShadow == null)
@@ -295,24 +317,21 @@ public class BattleManager : MonoBehaviour
             battleCamera.GetComponent<Transform>().position = new Vector3(0, battleCamera.GetComponent<Transform>().position.y, battleCamera.GetComponent<Transform>().position.z);
         }
     }
-
-   
-
-
-
+    //バトルから勝った場合
     public void BattleVictory()
     {
             resultImage.SetActive(true);
             resultMoneyText.text = resultmoney.ToString();
-            Invoke("StageClear",1.5f);
+        //お金の補償を見せるためにちょっと後StageClear()メソッドを呼ぶ。
+        Invoke("StageClear",1.5f);
    }
+    //バトルから負けた場合
     public void BattleLose()
     {
-      
             GameManager.instance.GameOver();
-       
+
     }
-   
+    //バトルから勝った場合ステージをクリアとする。
     public void StageClear()
     {
         Player.instance.Money += resultmoney;
@@ -325,7 +344,7 @@ public class BattleManager : MonoBehaviour
         MoveCameraOff();
         
     }
-
+    //ボスモンスターとの戦いから勝った場合はBattleVictory()ではなくGameClear()になる。
     public void GameClear()
     {
         GameManager.instance.GameClear();

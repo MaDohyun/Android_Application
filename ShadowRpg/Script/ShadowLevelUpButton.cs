@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ShadowLevelUpButton : MonoBehaviour
 {
+    //レベルアップさせるキャラクター
     [HideInInspector] public Shadow shadow;
+    //ボタンを押すとキャラクターの能力値を変更させる。
     public void LevelUpShadow()
     {
        

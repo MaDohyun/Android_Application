@@ -12,7 +12,8 @@ public class HeroKnight : Shadow
         protectEffect.SetActive(false);
 
     }
-    
+
+    //HeroKnightはスキルを使うと５秒間防御力が40%上がる。
     public void Skill()
     {
 

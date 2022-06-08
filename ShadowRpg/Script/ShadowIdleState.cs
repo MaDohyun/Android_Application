@@ -17,7 +17,9 @@ public class ShadowIdleState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      
+        //普段敵はIdleアニメの状態でバトル位置から離れると位置に戻る。または攻撃アニメに移動する。
+
+
             if (Mathf.Abs(shadowTransForm.position.x - shadow.battlePosition.position.x) > 0.1f)
             {
                 animator.SetBool("Move", true);

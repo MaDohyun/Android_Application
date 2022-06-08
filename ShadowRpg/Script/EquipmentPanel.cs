@@ -1,29 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//装備があるインベントリーpanel
 public class EquipmentPanel : MonoBehaviour
 {
+    //プレイヤーhaveEquipmentListの中の装備を表すslot
     public EquipmentSlot[] equipmentSlots;
     public Transform equipmentSlotHolder;
 
-
+    //プレイヤーBattleEquipmentListの中の装備を表すslot
     public EquipmentSelectedSlot[] equipmentSelectedSlots;
     public Transform equipmentSelectedSlotHolder;
-    // Start is called before the first frame update
+
     void Awake()
     {
         equipmentSlots = equipmentSlotHolder.GetComponentsInChildren<EquipmentSlot>();
         equipmentSelectedSlots = equipmentSelectedSlotHolder.GetComponentsInChildren<EquipmentSelectedSlot>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-            
-    }
-
+    //equipmentSlotsにプレイヤーhaveEquipmentListの中の装備を描く
     public void SetEquiptmentSlot()
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
@@ -36,6 +31,7 @@ public class EquipmentPanel : MonoBehaviour
             equipmentSlots[i].drawSlotSprite(Player.instance.haveEquipmentList[i].equiptmentIcon);
         }
     }
+    //equipmentSelectedSlotsにプレイヤーBattleEquipmentListの中の装備を描く
     public void SetSelectedEquiptmentSlot()
     {
         for (int i = 0; i < equipmentSelectedSlots.Length; i++)

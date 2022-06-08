@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class NextSceneManager : MonoBehaviour
 {
 
-   
+    //MapSceneを呼び込む
     public void nextScene()
     {
         SceneManager.LoadScene("MapScene");

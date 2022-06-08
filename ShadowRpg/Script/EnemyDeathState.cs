@@ -22,7 +22,7 @@ public class EnemyDeathState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
+      //死ぬ時、配列から自分を削除した後ゲームオブジェクトを破壊する。
         for (int i = 0; i < BattleManager.battleEnemyList.Count; i++) {
             if (BattleManager.battleEnemyList[i].gameObject == enemy.gameObject)
             {

@@ -9,9 +9,9 @@ public class EnemyAttackState : StateMachineBehaviour
     int target;
     int random;
     Vector3 vector3 ;
-    
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    //敵はAttackアニメになると攻撃範囲にあるランダムなキャラクターをターゲットにする。あるいは攻撃範囲より自分のバトルナンバーが大きい場合は一番前のキャラクターをターゲットにする。
+    //攻撃するときはターゲットの前に移動してアニメが終わるとき元のバトル位置に戻る。
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();

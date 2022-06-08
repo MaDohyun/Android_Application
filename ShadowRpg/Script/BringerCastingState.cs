@@ -18,16 +18,19 @@ public class BringerCastingState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //actionOnがtrueになるたびにskillCountの数が減る。
         if (enemy.actionOn)
         {
             enemy.skillCount -= 1;
             enemy.actionDelay = 0;
         }
+        //スキルが発動される。
         if (enemy.skillCount == 0)
         {
             animator.SetBool("Casting", false);
             
         }
+        //スキルなどで指定されている位置から離れると戻る。
         if (enemyTransform.position.x > enemy.battlePosition.position.x)
         {
             enemyTransform.Translate(Vector2.left * Time.deltaTime * enemy.appearSpeed);

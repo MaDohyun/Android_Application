@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
     
     public static GameManager instance = null;
 
+    //マップでの状態
     public enum MapState {Move,StageClear,StageClearNot }
     public MapState mapState;
+    //マップでの目的地
     public GameObject MapDestination;
     public int battleLevel;
-    // Start is called before the first frame update
+    // シングルトーンパターンを利用
     private void Awake()
     {
         
@@ -32,18 +34,19 @@ public class GameManager : MonoBehaviour
         battleLevel = 1;
         mapState = MapState.Move;
     }
-    // Update is called once per frame
+   
     void Update()
     {
         MapOn();
         ChangeMoveState();
+        //"GameOverScene" または"GameClearScene"の時、ゲームをリセットする。
         if (SceneManager.GetActiveScene().name == "GameOverScene" || SceneManager.GetActiveScene().name == "GameClearScene")
         {
            
             GameReset();
         }
     }
-
+    //MapSceneの場合、マップのゲームオブジェクトを見えるようにする。
     public void MapOn()
     {
         if (SceneManager.GetActiveScene().name == "MapScene")
@@ -51,18 +54,19 @@ public class GameManager : MonoBehaviour
             MapSceneCanvas.instance.gameObject.SetActive(true);
         }
     }
+    //目的地をクリアする場合、状態をmoveに変える。
     public void ChangeMoveState()
     {
         if (mapState == MapState.StageClear && MapDestination != null)
         {
-           
                 MapDestination.GetComponent<Land>().DestroyButton();
                 mapState = MapState.Move;
-       
         }
     }
+    //目的地のクリア
     public void StageClear()
     {
+        //MapSceneの場合
         if (SceneManager.GetActiveScene().name == "MapScene")
         {
             ResetShadow();
@@ -70,6 +74,7 @@ public class GameManager : MonoBehaviour
             GameManager.instance.mapState = GameManager.MapState.StageClear;
 
         }
+        //MapSceneのではない場合MapSceneを呼び込む
         if (SceneManager.GetActiveScene().name != "MapScene")
         {
             ResetShadow();
@@ -81,6 +86,7 @@ public class GameManager : MonoBehaviour
         }
        
     }
+    //プレイヤーの装備をリセット
     public void ResetEquiptment()
     {
        
@@ -91,6 +97,7 @@ public class GameManager : MonoBehaviour
 
         }
     }
+    //プレイヤーのキャラクターをリセット
     public void ResetShadow()
     {
         for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
@@ -103,7 +110,7 @@ public class GameManager : MonoBehaviour
 
         }
     }
-
+    //プレイヤーのbattleShadowList配列の要素をswapする。
     public void SwapShadow(List<Shadow> battleShadowList, int from, int to)
     {
         if (from + 1 > Player.instance.battleShadowList.Count || to + 1 > Player.instance.battleShadowList.Count)
@@ -122,6 +129,7 @@ public class GameManager : MonoBehaviour
             battleShadowList[to] = e;
         }
     }
+    //battleEnemyList配列の要素をswapする。
     public void SwapEnemy(List<Enemy> battleEnemyList, int from, int to)
     {
         if (from + 1 > BattleManager.battleEnemyList.Count || to + 1 > BattleManager.battleEnemyList.Count)
@@ -140,14 +148,17 @@ public class GameManager : MonoBehaviour
             battleEnemyList[to] = e;
         }
     }
+    //ゲームオーバーメソッド
     public void GameOver()
     {
         SceneManager.LoadScene("GameOverScene");
     }
+    //ゲームクリアメソッド
     public void GameClear()
     {
         SceneManager.LoadScene("GameClearScene");
     }
+    //ゲームリセットメソッド、シングルトーンパターンのオブジェクトを破壊する。
     public void GameReset()
     {
         Destroy(Player.instance.gameObject);

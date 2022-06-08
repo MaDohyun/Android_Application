@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BlackSlime : Enemy
-{
+{//現在スキルを使っているかどうか
     public bool isSkill = false;
+
     public override void Attack()
     {
         if (!isSkill)
         {
             targetShadow.TakeDamege(DAMAGE);
         }
+        //スキルを使っている場合、ブラックスライムは一番前にあるキャラクターを一番後ろに動かせる。
         else if (isSkill)
         {
               CreateStateText("Fear!");

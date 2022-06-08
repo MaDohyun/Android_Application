@@ -23,6 +23,8 @@ public class MagicBolt : MonoBehaviour
             targetVec = target.transform.position;
         }
     }
+
+    //MagicBoltはランダムな敵に飛んでいって距離が近くなるとダメージを与えて破壊される。
     private void Update()
     {
 

@@ -4,16 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BattleKeyController : MonoBehaviour
 {
+    //バトル中に選ばれたキャラクター
     Shadow selectedShadow;
+    //Defence状態のShields
     [SerializeField] GameObject[] defenceShields = new GameObject[3];
-
+    //キャラクターからシールドの位置
     Vector3 defenceShieldGap;
+    //バトル中にキャラクターが選ばれた時動くカメラ
     float cameraMoveXPosition;
     int random;
+    //逃げるボタンのアイコン
     [SerializeField] GameObject runImage;
+    //逃げるボタンの確率表示
     [SerializeField] Text runText;
+    //逃げるボタンのクールタイム
     float runCoolTime = 5;
+    //逃げるボタンのタイマー
     float runDelay;
+    //逃げるボタンの活性状態
     bool isRunOn = true;
     private void Start()
     {
@@ -22,12 +30,13 @@ public class BattleKeyController : MonoBehaviour
             defenceShields[i].SetActive(false);
         }
         defenceShieldGap = new Vector3(0, 0.25f, 0);
-
     }
     // Update is called once per frame
     void Update()
     {
-        if(runDelay > 0)
+        //selectedShadoのセッティング
+        SetSelectedShadow();
+        if (runDelay > 0)
         {
             runDelay -= Time.deltaTime;
         }
@@ -36,8 +45,7 @@ public class BattleKeyController : MonoBehaviour
             runImage.SetActive(true);
             isRunOn = true;
         }
-        SetSelectedShadow();
-
+        //Eボタンを押すとPlayerのbattleShadowList配列の0番目の要素のisSelectedがtrueになり、他のキャラクターはfalseになる。
         if (Input.GetKeyDown(KeyCode.E))
         {
             for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
@@ -64,6 +72,7 @@ public class BattleKeyController : MonoBehaviour
 
         }
 
+        //Wボタンを押すとPlayerのbattleShadowList配列の1番目の要素のisSelectedがtrueになり、他のキャラクターはfalseになる。
 
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -91,6 +100,7 @@ public class BattleKeyController : MonoBehaviour
 
         }
 
+        //Qボタンを押すとPlayerのbattleShadowList配列の2番目の要素のisSelectedがtrueになり、他のキャラクターはfalseになる。
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -117,6 +127,8 @@ public class BattleKeyController : MonoBehaviour
             }
 
         }
+        //Kボタンを押すとPlayerのbattleShadowList配列にある選ばれたキャラクターの要素の位置が＋1になる。
+        //ゲームできにはキャラクターが左に動くことになる。
         if (Input.GetKeyDown(KeyCode.K))
         {
             if (selectedShadow != null && selectedShadow.actionOn)
@@ -139,6 +151,8 @@ public class BattleKeyController : MonoBehaviour
             }
 
         }
+        //Lボタンを押すとPlayerのbattleShadowList配列にある選ばれたキャラクターの要素の位置が-1になる。
+        //ゲームできにはキャラクターが右に動くことになる。
         if (Input.GetKeyDown(KeyCode.L))
         {
             if (selectedShadow != null && selectedShadow.actionOn )
@@ -161,7 +175,7 @@ public class BattleKeyController : MonoBehaviour
             }
 
         }
-        
+        //Mボタンを押すと25%の確率でバトルから逃げることができる。
         if (Input.GetKeyDown(KeyCode.M))
         {
             if (GameManager.instance.battleLevel == 4)
@@ -188,12 +202,12 @@ public class BattleKeyController : MonoBehaviour
                     {
                         runImage.SetActive(false);
                         runDelay = runCoolTime;
+                        isRunOn = false;
                     }
                 }
             }
         }
-
-
+        //Iボタンを押すと選ばれたキャラクターの攻撃アニメを実行させる。
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (selectedShadow != null)
@@ -203,6 +217,7 @@ public class BattleKeyController : MonoBehaviour
             }
 
         }
+        //Oボタンを押すと選ばれたキャラクターの防御アニメを実行させて、キャラクターの位置にあるシールドをSetActive(true)にする。
         if (Input.GetKeyDown(KeyCode.O))
         {
             if (selectedShadow != null)
@@ -229,6 +244,8 @@ public class BattleKeyController : MonoBehaviour
             }
            
         }
+        //Pボタンを押すと選ばれたキャラクターのスキルアニメを実行させる。
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (selectedShadow != null && selectedShadow.actionOn&&selectedShadow.skillOn)
@@ -238,12 +255,14 @@ public class BattleKeyController : MonoBehaviour
             }
 
             }
-
+        //キャラクターの状態がDefendではない場合シールドをSetActive(false)にする。
         ShiledOff();
-        
+
+
     }
     public void ShiledOff()
     {
+        //シールドの初期化
         switch (Player.instance.battleShadowList.Count)
         {
             case 0:
@@ -271,8 +290,8 @@ public class BattleKeyController : MonoBehaviour
         }
     }
 
-   
-    
+
+    //selectedShadowをセッティングする。
     public void SetSelectedShadow()
     {
 

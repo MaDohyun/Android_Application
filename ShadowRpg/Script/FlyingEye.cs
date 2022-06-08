@@ -11,8 +11,9 @@ public class FlyingEye : Enemy
         playertakedamage = targetShadow.HP;
         base.Attack();
         playertakedamage -= targetShadow.HP;
+        //FlyingEyeは攻撃するとVampireTextを生成する。
         CreateVampireText((int)playertakedamage);
-       
+        //FlyingEyeは攻撃すると攻撃力ほどHPを回復する
         this.HP += playertakedamage;
     }
 

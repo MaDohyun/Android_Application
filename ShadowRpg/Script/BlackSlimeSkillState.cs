@@ -10,8 +10,7 @@ public class BlackSlimeSkillState : StateMachineBehaviour
     int random;
     Vector3 vector3;
 
-
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    //ブラックスライムはスキルアニメになると攻撃範囲にあるランダムなキャラクターをターゲットにする。あるいは一番前のキャラクターをターゲットにする。
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
@@ -20,6 +19,7 @@ public class BlackSlimeSkillState : StateMachineBehaviour
         {
             target = 0;
             vector3 = new Vector3(Player.instance.battleShadowList[target].transform.position.x + 1.5f, enemyTransForm.position.y, enemyTransForm.position.z);
+            //ターゲットの前に移動する。
             enemyTransForm.position = vector3;
 
         }
@@ -31,6 +31,7 @@ public class BlackSlimeSkillState : StateMachineBehaviour
                 target = random;
 
                 vector3 = new Vector3(Player.instance.battleShadowList[target].transform.position.x + 1.5f, enemyTransForm.position.y, enemyTransForm.position.z);
+                //ターゲットの前に移動する。
                 enemyTransForm.position = vector3;
 
             }
@@ -40,6 +41,7 @@ public class BlackSlimeSkillState : StateMachineBehaviour
                 target = random;
 
                 vector3 = new Vector3(Player.instance.battleShadowList[target].transform.position.x + 1.5f, enemyTransForm.position.y, enemyTransForm.position.z);
+                //ターゲットの前に移動する。
                 enemyTransForm.position = vector3;
 
             }
@@ -58,6 +60,7 @@ public class BlackSlimeSkillState : StateMachineBehaviour
     {
 
         vector3 = new Vector3(enemy.battlePosition.position.x, enemyTransForm.position.y, enemyTransForm.position.z);
+        //元の位置に戻る。
         enemyTransForm.position = vector3;
 
     }

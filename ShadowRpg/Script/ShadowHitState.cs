@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShadowHitState : StateMachineBehaviour
 {
     SpriteRenderer shadowSprite;
-
+    //攻撃されると色が変わる効果がある。（白い色）
     Color hitColor = new Color(0.8f, 0.8f, 0.8f, -0.2f);
     Color shadowColor = new Color(1, 1, 1, 1);
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

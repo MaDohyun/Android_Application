@@ -13,6 +13,7 @@ public class MoneyIcon : MapIcon
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //プレイヤーが当たるとお金をくれる。
         if (collision.CompareTag("Player"))
         {
             Invoke("IconTriggerOn", 0.4f);
@@ -22,7 +23,6 @@ public class MoneyIcon : MapIcon
     }
     public void IconTriggerOn()
     {
-
         Player.instance.Money += randommoney;
         Destroy(this.gameObject);
         GameManager.instance.StageClear();

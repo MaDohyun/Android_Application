@@ -4,19 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MapUIManager : MonoBehaviour
 {
+    //キャラクター編成panel
     [SerializeField] ShadowSelectionPanel shadowSelectionPanel;
+    //インベントリpanel
     [SerializeField] EquipmentPanel equipmentPanel;
 
 
     [SerializeField] Text currentMoneyText;
     bool shadowSelectionPanelOn =false;
     bool inventoryPanelOn = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
+   
 
     // Update is called once per frame
     void Update()

@@ -11,7 +11,7 @@ public class MushroomSkillState : StateMachineBehaviour
     Vector3 vector3;
 
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    //Mushroomはスキルアニメになると攻撃範囲にあるランダムなキャラクターをターゲットにする。あるいは一番前のキャラクターをターゲットにする。
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
@@ -46,11 +46,6 @@ public class MushroomSkillState : StateMachineBehaviour
         }
         enemy.targetShadow = Player.instance.battleShadowList[target].GetComponent<Shadow>();
 
-    }
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

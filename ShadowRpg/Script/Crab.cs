@@ -10,6 +10,7 @@ public class Crab : Enemy
     protected override void Start()
     {
         base.Start();
+        //Crabは防御力がすごい敵なのでバトルが開始すると一番前にくる。
         for(int i=0;i< BattleManager.battleEnemyList.Count; i++)
         {
             if (BattleManager.battleEnemyList[i] == this)
@@ -23,7 +24,7 @@ public class Crab : Enemy
     public override void TakeDamege(float damage)
     {
 
-
+        //スキルを使うと一回の攻撃をブロックする。
         if (isSkill)
         {
             if (HP > 0)

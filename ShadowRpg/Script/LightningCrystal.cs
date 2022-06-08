@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class LightningCrystal : Equipment
 {
     [SerializeField] float damage;
@@ -31,23 +32,25 @@ public class LightningCrystal : Equipment
         }
     }
 
+    //LightningCrystalはランダムの敵に5回lightningを生成して攻撃する。
     public override void UseEquiptment()
     {
         for (int i = 0; i < 5; i++)
         {
             
             Invoke("MakeLightning", i * 0.3f);
-
-        }
+ }
 
     }
+    
     public void MakeLightning()
     {
         Vector2 targetVec;
         
         random = Random.Range(0, BattleManager.battleEnemyList.Count);
-       
-            targetVec = new Vector2(BattleManager.battleEnemyList[random].transform.position.x, lightning.transform.position.y);
+
+        //targetVec = lightningを生成する位置
+        targetVec = new Vector2(BattleManager.battleEnemyList[random].transform.position.x, lightning.transform.position.y);
 
             GameObject copy = Instantiate(lightning, targetVec, Quaternion.identity);
             copy.transform.SetParent(this.transform);

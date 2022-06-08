@@ -15,6 +15,7 @@ public class BringerSkillIdle : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //ぼすのskillCountによって位置と大きさが変わる。０になると発動される。
         switch (bringerSkill.bringer.skillCount)
         {
             case 2:

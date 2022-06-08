@@ -11,6 +11,7 @@ public class Mushroom : Enemy
         {
             targetShadow.TakeDamege(DAMAGE);
         }
+        //Mushroomはスキルを使っている時攻撃をするとターゲットのアクションタイマーを初期化させる。
         else
         {
             targetShadow.TakeDamege(DAMAGE);

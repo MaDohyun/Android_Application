@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//敵のデータベース
 public class EnemyDB : MonoBehaviour
 {
     public List<Enemy> Level1enemyList;

@@ -32,6 +32,7 @@ public class MagicWand : Equipment
         }
     }
 
+    //MagicWandはMagicBoltを生成する。
     public override void UseEquiptment()
     {
         GameObject copy = Instantiate(magicBolt,this.transform.position ,Quaternion.identity);

@@ -6,7 +6,8 @@ public class NormalKnight : Shadow
 {
     public override void TakeDamege(float damage)
     {
-        if(actionState == ActionState.Skill)
+        //NormalKnightはスキルを使うと攻撃されたら一気攻撃をブロックして反撃する。
+        if (actionState == ActionState.Skill)
         {
             if (HP > 0)
             {
@@ -26,9 +27,9 @@ public class NormalKnight : Shadow
         {
             targetEnemy.TakeDamege(DAMAGE);
         }
+        //NormalKnightはスキルを使うと攻撃されたら反撃する。
         else
         {
-
             animator.SetBool("Skill", false);
             CreateStateText("Counter");
             targetEnemy.TakeDamege(DAMAGE*2);

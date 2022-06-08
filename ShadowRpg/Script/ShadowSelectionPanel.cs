@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//キャラクターを編成するpanel
 public class ShadowSelectionPanel : MonoBehaviour
 {
+    //プレイヤーhaveShadowListの中のキャラクター表すslot
     public ShadowSlot[] shadowSlots;
     public Transform slotHolder;
+    //プレイヤーBattleShadowListの中のキャラクター表すslot
     public ShadowSelectedSlot[] shadowSelectedSlots;
     public Transform selectedslotHolder;
     // Start is called before the first frame update
@@ -15,11 +17,7 @@ public class ShadowSelectionPanel : MonoBehaviour
         shadowSelectedSlots = selectedslotHolder.GetComponentsInChildren<ShadowSelectedSlot>();
 
     }
-    private void Update()
-    {
-        
-    }
-
+    //shadowSlotsにプレイヤーhaveShadowListの中のキャラクターを描く
     public void SetShadowSlot()
     {
         for (int i = 0; i < shadowSlots.Length; i++)
@@ -33,6 +31,7 @@ public class ShadowSelectionPanel : MonoBehaviour
             shadowSlots[i].SetselectedBorderLine();
         }
     }
+    //shadowSelectedSlotsにプレイヤーBattleShadowListの中のキャラクターを描
     public void SetSelectedShadowSlot()
     {
         for (int i = 0; i < shadowSelectedSlots.Length; i++)

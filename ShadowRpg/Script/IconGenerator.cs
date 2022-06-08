@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//マップのアイコンを生成するクラス
 public class IconGenerator : MonoBehaviour
 {
-  
-    
-    
     int random;
 
     [SerializeField] MapIcon monsterIcon;
@@ -15,10 +13,7 @@ public class IconGenerator : MonoBehaviour
     [SerializeField] MapIcon moneyIcon;
     [SerializeField] MapIcon boxIcon;
 
-    private void Start()
-    {
-    }
-
+    //ランダムでマップにアイコンを生成する。
     public MapIcon IconGenerate(Transform targettransform)
     {
         random = Random.Range(0, 100);

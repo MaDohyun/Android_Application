@@ -17,7 +17,7 @@ public class BlackSlimeIdleState : StateMachineBehaviour
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
+    {//バトル中に指定された位置から離れると元の位置に戻す。
         if (enemy.isBattle)
         {
             if (Mathf.Abs(enemyTransForm.position.x - enemy.battlePosition.position.x) > 0.1f)
@@ -28,6 +28,7 @@ public class BlackSlimeIdleState : StateMachineBehaviour
 
             if (Player.instance.battleShadowList.Count > 0)
             {
+                //アクションが可能になると2分の1の確率で攻撃やスキルを使う。
                 if (enemy.actionOn)
                 {
                     random = Random.Range(0, 2);
@@ -48,10 +49,5 @@ public class BlackSlimeIdleState : StateMachineBehaviour
         }
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
 
 }

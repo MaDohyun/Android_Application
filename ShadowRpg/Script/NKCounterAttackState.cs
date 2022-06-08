@@ -10,8 +10,6 @@ public class NKCounterAttackState : StateMachineBehaviour
     
     Vector3 vector3;
 
-
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
@@ -24,14 +22,6 @@ public class NKCounterAttackState : StateMachineBehaviour
             shadowTransForm.position = vector3;
             shadow.targetEnemy = BattleManager.battleEnemyList[target];
         }
-
-    }
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-
 
     }
 

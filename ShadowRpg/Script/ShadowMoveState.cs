@@ -19,7 +19,7 @@ public class ShadowMoveState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-
+        //キャラクターはMoveアニメになるとバトル位置まで戻る。
         if (shadowTransform.position.x > shadow.battlePosition.position.x)
         {
             shadowTransform.Translate(Vector2.left * Time.deltaTime * shadow.appearSpeed);

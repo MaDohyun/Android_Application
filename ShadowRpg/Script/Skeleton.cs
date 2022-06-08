@@ -10,6 +10,7 @@ public class Skeleton : Enemy
     protected override void Update()
     {
         base.Update();
+        //スキルを使っている時actionOnがtrueになると新しく行動する。
         if (actionOn && isSkill)
         {
             isSkill = false;
@@ -32,7 +33,7 @@ public class Skeleton : Enemy
     public override void TakeDamege(float damage)
     {
 
-
+        //スキルを使っている時攻撃されると一回ブロックする。
         if (isSkill)
         {
             if (HP > 0)

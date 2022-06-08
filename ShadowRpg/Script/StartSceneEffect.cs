@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//StartSceneの演出のクラス
 public class StartSceneEffect : MonoBehaviour
 {
     public GameObject summonEffect1;

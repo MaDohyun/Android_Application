@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+//プレイヤーhaveShadowListの中のキャラクターを表すslotクラス
 public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] GameObject slotImage;
@@ -12,12 +13,14 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
     [SerializeField] ShadowLevelUpButton ShadowLevelUpButton;
     [SerializeField] ShadowInformation shadowInformation;
     Shadow shadow;
+    //trueになるとプレイヤーBattleShadowListにいれる。
     public bool selectedOn = false;
 
     private void Start()
     {
         for (int i = 0; i < Player.instance.battleShadowList.Count; i++)
         {
+            //もともとこのキャラクターがBattleShadowListの中にある場合
             if (Player.instance.battleShadowList[i] == shadow)
             {
                 selectedOn = true;
@@ -37,6 +40,7 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
             selectedBorderLine.SetActive(false);
         }
     }
+    //slotのイメージを描く
 
     public void drawSlotSprite(Sprite sprite)
     {
@@ -44,16 +48,20 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
         slotImage.GetComponent<Image>().sprite = sprite;
         
     }
+    //slotのイメージをリセット
     public void ResetSlot()
     {
         slotImage.SetActive(false);
         selectedBorderLine.SetActive(false);
         selectedOn = false;
     }
+    //このslotのキャラクターをセットする。
+
     public void SetShadow(Shadow shadow)
     {
         this.shadow = shadow;
     }
+    //もともとbattleShadowList中にある場合は枠を活性化させる。
     public void SetselectedBorderLine()
     {
         for (int i=0;i< Player.instance.battleShadowList.Count;i++)
@@ -65,6 +73,7 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
             }
         }
     }
+    //ボタンを押すとこのslotのキャラクターをbattleShadowList中に入れる。
     public void RegisterShadow()
     {
         if (this.shadow != null)
@@ -87,6 +96,7 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
 
                 }
             }
+            //もともとbattleShadowList中にある場合は
             else if (selectedOn)
             {
 
@@ -103,7 +113,7 @@ public class ShadowSlot : MonoBehaviour, IPointerEnterHandler
         }
       
     }
-
+    //マウスを近づくと情報が出る。
     public void OnPointerEnter(PointerEventData eventData)
     {
         ShadowLevelUpButton.shadow = this.shadow;

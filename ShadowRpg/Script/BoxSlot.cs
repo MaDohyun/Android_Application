@@ -4,22 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BoxSlot : MonoBehaviour
 {
+    //装備のデータベース
     [SerializeField] EquipmentDB equipmentDB;
+    //キャラクターのデータベース
     [SerializeField] ShadowDB shadowDB;
-
+    //宝
     Shadow shadowGoods;
+    //宝
     Equipment equipmentGoods;
-
+    //宝のアイコン
     [SerializeField] Image iconImage;
+    //宝の情報を表すtext
     [SerializeField] Text infoText;
-
+    //プレイヤーの位置
     [SerializeField] Transform playerTransform;
-
+    //宝のタイプ
     public enum GoodsType { shadow, equipment }
     public GoodsType goodsType;
     int random;
     private void Start()
-    {
+    {//まず宝を決める。
         random = Random.Range(0, 2);
         if (random == 0)
         {
@@ -29,7 +33,7 @@ public class BoxSlot : MonoBehaviour
         {
             goodsType = GoodsType.equipment;
         }
-
+        //宝のタイプがキャラクターの場合。
         if (goodsType == GoodsType.shadow)
         {
             random = Random.Range(0, shadowDB.shadowList.Count);
@@ -45,6 +49,7 @@ public class BoxSlot : MonoBehaviour
                                       "Skill:" + shadowGoods.SKILL + "\n" +
                                       "";
         }
+        //宝のタイプが装備の場合。
         else if (goodsType == GoodsType.equipment)
         {
             random = Random.Range(0, equipmentDB.equiptmentList.Count);
@@ -57,7 +62,7 @@ public class BoxSlot : MonoBehaviour
 
 
     }
-
+    //プレイヤーがボタンを押すと宝をプレイヤーに結ぶ。
     public void BuyGoods()
     {
             if (goodsType == GoodsType.shadow)
@@ -77,7 +82,7 @@ public class BoxSlot : MonoBehaviour
             }
             this.gameObject.SetActive(false);
         }
-    
+    //宝箱をリセットする。
 
     public void ResetSlot()
     {

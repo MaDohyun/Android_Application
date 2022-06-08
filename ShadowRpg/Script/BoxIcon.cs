@@ -6,6 +6,7 @@ public class BoxIcon : MapIcon,ITriggerOn
 {
 
     [SerializeField] BoxPanel boxPanel;
+    //プレイヤーが当たる場合宝箱のPanelを見えるようにする。
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -20,8 +21,7 @@ public class BoxIcon : MapIcon,ITriggerOn
     {
 
         boxPanel.gameObject.SetActive(true);
+        //機能が終わったらアイコンを破壊する。
         Destroy(this.gameObject);
-
-
     }
 }

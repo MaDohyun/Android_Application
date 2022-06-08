@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ShadowInformation : MonoBehaviour
 {
+    //キャラクターの情報text
     [SerializeField] Text shadowInfoText;
+    //キャラクターの名前text
     [SerializeField] Text shadowNameText;
    [HideInInspector]  public Shadow shadow;
     // Update is called once per frame

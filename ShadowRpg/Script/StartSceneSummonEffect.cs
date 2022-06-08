@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//StartSceneのキャラクターを生成する時の効果のクラス
 public class StartSceneSummonEffect : MonoBehaviour
 {
     SpriteRenderer sr;

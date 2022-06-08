@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IronBoot : Equipment
 {
-
+    //IronBootはbattleShadowListの０番目のキャラクターのアクションタイマーのスピードを1.5倍にする。
     private void Start()
     {
       

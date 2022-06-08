@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MapSceneCanvas : MonoBehaviour
 {
-   
+    // シングルトーンパターンを利用
     public static MapSceneCanvas instance = null;
-    // Start is called before the first frame update
     private void Awake()
     {
         if(null == instance)
@@ -21,7 +20,7 @@ public class MapSceneCanvas : MonoBehaviour
                     }
     }
     void Update()
-    {
+    {//MapSceneではない場合このオブジェクトを見えないようにする。
         if (SceneManager.GetActiveScene().name != "MapScene")
         {
             this.gameObject.SetActive(false);

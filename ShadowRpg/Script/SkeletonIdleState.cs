@@ -27,7 +27,7 @@ public class SkeletonIdleState : StateMachineBehaviour
 
 
             if (Player.instance.battleShadowList.Count > 0)
-            {
+            {//アクションが可能になると2分の1の確率で攻撃やスキルを使う。
                 if (enemy.actionOn)
                 {
                     random = Random.Range(0, 2);
@@ -48,10 +48,5 @@ public class SkeletonIdleState : StateMachineBehaviour
         }
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
-
+  
 }

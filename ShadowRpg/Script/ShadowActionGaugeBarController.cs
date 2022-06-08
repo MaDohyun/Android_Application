@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//敵のアクションのタイマーはクールタイムを用いたゲージバー
 public class ShadowActionGaugeBarController : MonoBehaviour
 {
     [SerializeField]
@@ -32,7 +33,7 @@ public class ShadowActionGaugeBarController : MonoBehaviour
 
     }
     private void HandleHP()
-    {
+    {//線形補間を用いて柔らかなゲージバーを実装
         ActionGaguebar.value = Mathf.Lerp(ActionGaguebar.value, (float)curActionGague / (float)maxActionGague, Time.deltaTime * 10);
     }
 }

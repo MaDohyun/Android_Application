@@ -36,12 +36,10 @@ public class Gunpowder : Equipment
     {
         Explosion.Play();
         Invoke("StopParticle", 3.0f);
-        for(int i=0;i< BattleManager.battleEnemyList.Count; i++)
+        for (int i = 0; i < BattleManager.battleEnemyList.Count; i++)
         {
             BattleManager.battleEnemyList[i].HP -= damage;
         }
-
-
     }
     public void StopParticle()
     {

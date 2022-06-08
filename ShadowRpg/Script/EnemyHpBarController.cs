@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+//敵のHpを用いたゲージバー
 public class EnemyHpBarController : MonoBehaviour
 {
     [SerializeField]
@@ -32,7 +34,7 @@ public class EnemyHpBarController : MonoBehaviour
 
     }
     private void HandleHP()
-    {
+    {//線形補間を用いて柔らかなゲージバーを実装
         hpbar.value = Mathf.Lerp(hpbar.value, (float)curhp / (float)maxhp, Time.deltaTime * 10);
     }
 }

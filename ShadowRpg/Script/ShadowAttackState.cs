@@ -9,9 +9,8 @@ public class ShadowAttackState : StateMachineBehaviour
     int target;
     int random;
     Vector3 vector3;
-
-
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    //キャラクターはAttackアニメになると攻撃範囲にあるランダムな敵をターゲットにする。あるいは攻撃範囲より自分のバトルナンバーが大きい場合は一番前の敵をターゲットにする。
+    //攻撃するときはターゲットの前に移動してアニメが終わるとき元のバトル位置に戻る。
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         shadow = animator.GetComponent<Shadow>();
@@ -45,14 +44,6 @@ public class ShadowAttackState : StateMachineBehaviour
 
             }
         }
-    }
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-
-
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

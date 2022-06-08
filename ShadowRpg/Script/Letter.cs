@@ -32,14 +32,14 @@ public class Letter : Equipment
             timer = cooltime;
         }
     }
-
+    //Letterは一番後ろの敵を一番前に動かす。
     public override void UseEquiptment()
     {
         targetNumber = BattleManager.battleEnemyList.Count - 1;
         transform.position = BattleManager.battleEnemyList[targetNumber].gameObject.transform.position;
         heart.Play();
         Invoke("StopParticle", 3.0f);
-
+        //Insetを用いて一番前にする。
         BattleManager.battleEnemyList.Insert(0,BattleManager.battleEnemyList[targetNumber]);
         BattleManager.battleEnemyList.RemoveAt(targetNumber+1);
         

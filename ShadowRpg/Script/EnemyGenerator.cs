@@ -7,7 +7,8 @@ public class EnemyGenerator : MonoBehaviour
    [SerializeField] EnemyDB enemyDB;
     int random;
     Enemy newEnemy;
-   
+
+    //バトルレベルによって生成する敵が異なる。
     public Enemy GenerateLevel1Enemy()
     {
        random = Random.Range(0, enemyDB.Level1enemyList.Count);

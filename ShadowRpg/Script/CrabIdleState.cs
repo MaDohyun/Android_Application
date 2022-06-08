@@ -29,6 +29,7 @@ public class CrabIdleState : StateMachineBehaviour
 
             if (Player.instance.battleShadowList.Count > 0)
             {
+                //アクションが可能になると2分の1の確率で攻撃やスキルを使う。
                 if (enemy.actionOn)
                 {
                     random = Random.Range(0, 2);

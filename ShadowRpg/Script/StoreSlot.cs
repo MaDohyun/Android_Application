@@ -5,23 +5,30 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class StoreSlot : MonoBehaviour
 {
+    //装備のデータベース
     [SerializeField] EquipmentDB equipmentDB;
+    //キャラクターのデータベース
     [SerializeField] ShadowDB shadowDB;
-
+    //商品
     Shadow shadowGoods;
+    //商品
     Equipment equipmentGoods;
-
+    //商品のアイコン
     [SerializeField] Image iconImage;
+    //商品の情報を表すtext
     [SerializeField] Text infoText;
+    //商品のお値段を表すtext
     [SerializeField] Text priceText;
     [SerializeField] Transform playerTransform;
-
+    //商品のお値段
     public int price;
+    //商品のタイプ
     public enum GoodsType {shadow,equipment}
     public GoodsType goodsType;
     int random;
     private void Start()
     {
+        //まず商品を決める。
         random = Random.Range(0,2);
         if(random == 0)
         {
@@ -31,8 +38,8 @@ public class StoreSlot : MonoBehaviour
         {
             goodsType  = GoodsType.equipment;
         }
-
-        if(goodsType == GoodsType.shadow)
+        //商品のタイプがキャラクターの場合。
+        if (goodsType == GoodsType.shadow)
         {
             random = Random.Range(0, shadowDB.shadowList.Count);
             shadowGoods = shadowDB.shadowList[random];
@@ -47,6 +54,7 @@ public class StoreSlot : MonoBehaviour
                                       "Skill:" + shadowGoods.SKILL + "\n" +
                                       "";
         }
+        //商品のタイプが装備の場合。
         else if (goodsType == GoodsType.equipment)
         {
             random = Random.Range(0, equipmentDB.equiptmentList.Count);
@@ -61,7 +69,7 @@ public class StoreSlot : MonoBehaviour
         priceText.text = "" + price;
 
     }
-
+    //プレイヤーがボタンを押すと商品をプレイヤーに結ぶ。
     public void BuyGoods()
     {
    if(Player.instance.Money >= price)
@@ -85,7 +93,7 @@ public class StoreSlot : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-
+    //商店をリセットする。
     public void ResetSlot()
     {
         random = Random.Range(0, 2);

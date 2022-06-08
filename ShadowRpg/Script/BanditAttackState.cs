@@ -11,7 +11,6 @@ public class BanditAttackState : StateMachineBehaviour
     Vector3 vector3;
 
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
@@ -19,26 +18,20 @@ public class BanditAttackState : StateMachineBehaviour
         shadowTransForm = animator.GetComponent<Transform>();
         if (BattleManager.battleEnemyList.Count > 0)
         {
+            //Banditのターゲットはいつも一番後ろにいる敵になる。
             target = BattleManager.battleEnemyList.Count-1;
+            //ターゲットの前の位置
             vector3 = new Vector3(BattleManager.battleEnemyList[target].transform.position.x - 0.7f, shadowTransForm.position.y, shadowTransForm.position.z);
+            //ターゲットの前に移動する。
             shadowTransForm.position = vector3;
             shadow.targetEnemy = BattleManager.battleEnemyList[target];
         }
 
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-
-
-    }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        //攻撃が終わると元の場所に戻る。
         vector3 = new Vector3(shadow.battlePosition.position.x, shadowTransForm.position.y, shadowTransForm.position.z);
         shadowTransForm.position = vector3;
 
