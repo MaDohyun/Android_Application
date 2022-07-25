@@ -14,6 +14,7 @@ public class Bomb : MonoBehaviour
     [Header("LayerMasks")]
     public LayerMask wallLayer;
     public LayerMask destructablewallLayer;
+    public LayerMask characterLayer;
 
     [Header("Trigger")]
     //動きをするかどうか
@@ -119,8 +120,8 @@ public class Bomb : MonoBehaviour
             // ブロックとのヒット判定結果を保存する変数
             RaycastHit wallHit;
             RaycastHit destructablewallHit;
-
-            // 方向にブロックがあるか確認する
+            RaycastHit characterHit;
+            // 方向にブロックやキャラクターがあるか確認する
             Physics.Raycast
             (
                 transform.position + new Vector3(0, 0f, 0),
@@ -137,9 +138,17 @@ public class Bomb : MonoBehaviour
                i,
                destructablewallLayer
            );
+            Physics.Raycast
+           (
+               transform.position + new Vector3(0, 0f, 0),
+               direction,
+               out characterHit,
+               i,
+               characterLayer
+           );
 
-            // 方向にブロックがない場合
-            if (!wallHit.collider&& !destructablewallHit.collider)
+            // 方向にブロックやキャラクターがない場合
+            if (!wallHit.collider&& !destructablewallHit.collider &&!characterHit.collider)
             {
                 //またparticleを入力された方向に生成して連鎖爆発を続ける
                 GameObject explosion = Instantiate
@@ -155,6 +164,20 @@ public class Bomb : MonoBehaviour
             {
                 //particleを一回だけ入力された方向に生成してループを止める。
                 //これは破壊できるブロックがparticleを感知して破壊されるため一回だけparticleを生成する必要がある。
+                GameObject explosion = Instantiate
+                (
+                    explosionPrefab,
+                    transform.position + (i * direction),
+                    explosionPrefab.transform.rotation
+                );
+                explosion.transform.parent = transform;
+                break;
+            }
+            // 方向にキャラクターがいる場合
+            else if (characterHit.collider)
+            {
+                //particleを一回だけ入力された方向に生成してループを止める。
+                //これはキャラクターがparticleを感知してなくなるため一回だけparticleを生成する必要がある。
                 GameObject explosion = Instantiate
                 (
                     explosionPrefab,
