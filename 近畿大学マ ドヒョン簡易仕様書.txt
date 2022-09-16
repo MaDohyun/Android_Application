@@ -71,6 +71,6 @@ android Pixel 3a API 30
 なし
 
 ### 該当プロジェクトのリポジトリ URL（GitHub,GitLab など Git ホスティングサービスを利用されている場合）
-https://github.com/xxxx
+https://github.com/MaDohyun/Android_Application
 
 
